@@ -1,16 +1,17 @@
 import { Outlet, ReactLocation, Router } from "@tanstack/react-location";
+import { AppContextProvider } from "contexts/AppContext";
 import React from "react";
 import { Routes } from "Routes";
 
 function App() {
 	const location = new ReactLocation();
 	return (
-		<div className="">
+		<AppContextProvider>
 			<Router location={location} routes={Routes}>
 				<Outlet />
 			</Router>
-		</div>
+		</AppContextProvider>
 	);
 }
 
-export default App
+export default App;

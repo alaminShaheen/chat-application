@@ -1,11 +1,22 @@
 import { Route } from "@tanstack/react-location";
+import { ProtectedRoute } from "components/authentication/ProtectedRoute";
+import { Home } from "pages/Home";
 import { Login } from "pages/Login";
 import { Register } from "pages/Register";
 import React from "react";
+import { RoutePaths } from "RoutePaths";
 
 export const Routes: Route[] = [
-	{ path: "/", element: <Login /> },
-	{ path: "register", element: <Register /> },
+	{ path: RoutePaths.LOGIN, element: <Login /> },
+	{ path: RoutePaths.REGISTER, element: <Register /> },
+	{
+		path: RoutePaths.HOME,
+		element: (
+			<ProtectedRoute>
+				<Home />
+			</ProtectedRoute>
+		),
+	},
 	// {
 	// 	path: "posts",
 	// 	element: <Posts/>,

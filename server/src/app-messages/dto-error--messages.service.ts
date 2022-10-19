@@ -5,7 +5,7 @@ import { StringUtils } from "../utils/string.utils";
 @Injectable()
 export class DtoErrorMessagesService {
 	static IS_REQUIRED<T>(dtoType: ClassConstructor<T>, fieldName: keyof T) {
-		return `${StringUtils.capitalize(fieldName.toString())} is required`;
+		return `${StringUtils.capitalize(fieldName.toString())} is required.`;
 	}
 
 	static MUST_BE_TYPE<T, K>(
@@ -15,14 +15,14 @@ export class DtoErrorMessagesService {
 	) {
 		return `${StringUtils.capitalize(
 			fieldName.toString(),
-		)} must be of type ${type.toString()}`;
+		)} must be of type ${type.toString()}.`;
 	}
 
 	static INVALID_FIELD<T, K>(
 		dtoType: ClassConstructor<T>,
 		fieldName: keyof T,
 	) {
-		return `${StringUtils.capitalize(fieldName.toString())} is invalid`;
+		return `${StringUtils.capitalize(fieldName.toString())} is invalid.`;
 	}
 
 	static NOT_MATCH<T>(
@@ -32,7 +32,7 @@ export class DtoErrorMessagesService {
 	) {
 		return `${StringUtils.capitalize(
 			fieldName1.toString(),
-		)} and ${StringUtils.capitalize(fieldName2.toString())} don't match`;
+		)} and ${StringUtils.capitalize(fieldName2.toString())} don't match.`;
 	}
 
 	static STRING_MAX_CHAR<T>(
@@ -42,7 +42,7 @@ export class DtoErrorMessagesService {
 	) {
 		return `${StringUtils.capitalize(
 			fieldName1.toString(),
-		)} cannot be grater than ${length} characters`;
+		)} cannot be grater than ${length} characters.`;
 	}
 
 	static STRING_MIN_CHAR<T>(
@@ -52,6 +52,6 @@ export class DtoErrorMessagesService {
 	) {
 		return `${StringUtils.capitalize(
 			fieldName1.toString(),
-		)} must be grater than ${length} characters`;
+		)} must be greater than ${length} characters.`;
 	}
 }

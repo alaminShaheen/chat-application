@@ -3,10 +3,10 @@ import { Tokens } from "authentication/dtos/tokens.dto";
 import { Expose, Type } from "class-transformer";
 import { UserResponseDto } from "../../users/dtos/user-response.dto";
 
-export class RegisterUserResponseDto {
+export class LoginUserResponseDto {
 	@ApiProperty({
 		type: UserResponseDto,
-		description: "User information of the user registering.",
+		description: "User information of the user logging in.",
 	})
 	@Type(() => UserResponseDto)
 	@Expose()

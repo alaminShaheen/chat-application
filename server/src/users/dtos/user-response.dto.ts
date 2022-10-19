@@ -5,36 +5,36 @@ import { Expose } from "class-transformer";
 export class UserResponseDto {
 	@ApiProperty({
 		type: Number,
-		description: "User id of the user"
+		description: "User id of the user",
 	})
 	@Expose()
-	public id: string;
-	
+	public id: number;
+
 	@ApiProperty({
 		type: String,
-		description: "Username of the user"
+		description: "Username of the user",
 	})
 	@Expose()
 	public username: string;
-	
+
 	@ApiProperty({
 		type: String,
-		description: "Creation date of the user"
+		description: "Creation date of the user",
 	})
 	@Expose()
 	public createdAt: Date;
-	
+
 	@ApiProperty({
 		type: String,
-		description: "Date when user was last updated"
+		description: "Date when user was last updated",
 	})
 	@Expose()
 	public updatedAt: Date;
-	
+
 	@ApiProperty({
 		type: String,
 		required: false,
-		description: "Avatar string of the user"
+		description: "Avatar string of the user",
 	})
 	@Optional()
 	@Expose()

@@ -5,7 +5,8 @@ import {
 	ReactNode,
 	useState,
 } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/all";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { BiErrorAlt } from "react-icons/bi";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 	label?: string;
@@ -21,7 +22,7 @@ export const LabelledInputField = forwardRef<HTMLInputElement, InputProps>(
 
 		const generateInputFieldClassNames = () => {
 			let classes = className ? className + " " : "";
-			classes += (hasError ? "border-red-500" : "") + " ";
+			classes += (hasError ? "border-red-500" : "border-gray-300") + " ";
 			classes += (hasError ? "focus:border-red-500" : "focus:border-teal-500") + " ";
 			classes += (icon ? "pl-9" : "") + " ";
 			classes += (type === "password" ? "pr-9" : "") + " ";
@@ -32,7 +33,7 @@ export const LabelledInputField = forwardRef<HTMLInputElement, InputProps>(
 			if (showPassword) {
 				return (
 					<AiOutlineEyeInvisible
-						className="absolute top-3.5 right-3 text-gray-600"
+						className="absolute top-3.5 right-3 text-gray-600 cursor-pointer"
 						onClick={() => setShowPassword((prev) => !prev)}
 						size={18}
 					/>
@@ -40,7 +41,7 @@ export const LabelledInputField = forwardRef<HTMLInputElement, InputProps>(
 			} else {
 				return (
 					<AiOutlineEye
-						className="absolute top-3.5 right-3 text-gray-600"
+						className="absolute top-3.5 right-3 text-gray-600 cursor-pointer"
 						onClick={() => setShowPassword((prev) => !prev)}
 						size={18}
 					/>
@@ -76,7 +77,12 @@ export const LabelledInputField = forwardRef<HTMLInputElement, InputProps>(
 					{icon && icon}
 					{type === "password" && renderPasswordVisibility()}
 				</div>
-				{hasError && <span className="text-red-500 text-sm mt-2">{errorMessage}</span>}
+				{hasError && (
+					<span className="text-red-500 text-sm mt-2 flex items-center">
+						<BiErrorAlt className="inline mr-1" size={18} />
+						{errorMessage}
+					</span>
+				)}
 			</div>
 		);
 	},
