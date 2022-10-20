@@ -11,10 +11,10 @@ export const Register = () => {
 
 	return (
 		<div className="flex w-screen h-screen items-center p-20">
-			<section className="w-7/12 p-12 flex justify-center align-middle">
+			<section className="w-1/2 p-5 flex justify-center">
 				<RegisterForm onRegisterUser={onRegisterUser} />
 			</section>
-			<section className="w-5/12">
+			<section className="w-1/2">
 				<ImageShowcase />
 			</section>
 		</div>

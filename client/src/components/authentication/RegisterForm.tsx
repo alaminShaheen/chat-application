@@ -40,7 +40,7 @@ export const RegisterForm = (props: RegisterFormProps) => {
 		try {
 			const { data } = await onRegisterUser(formData);
 			authenticateUser(data);
-			navigate({ to: "/home" });
+			navigate({ to: RoutePaths.HOME });
 		} catch (error) {
 			if (error instanceof AxiosError<ValidationErrors>) {
 				const validationErrors = error.response?.data as ValidationErrors;
@@ -59,8 +59,8 @@ export const RegisterForm = (props: RegisterFormProps) => {
 	};
 
 	return (
-		<form className="register-form-container w-3/5 px-14" onSubmit={handleSubmit(onSubmit)}>
-			<h2 className="text-center text-3xl text-gray-700 mb-6">Create an account</h2>
+		<form className="register-form-container w-3/5 px-10" onSubmit={handleSubmit(onSubmit)}>
+			<h2 className="text-center text-3xl text-gray-700 mb-6 pb-2">Create an account</h2>
 			<LabelledInputField
 				{...register("username", {
 					required: { value: true, message: DisplayFormError.required("username") },
