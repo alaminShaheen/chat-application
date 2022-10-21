@@ -10,6 +10,6 @@ export class AuthenticationService {
 	}
 
 	static login(body: LoginRequest) {
-		return axiosInstance.post<UserAuthenticationResponse>(ServiceLinks.register(), body);
+		return axiosInstance.post<UserAuthenticationResponse>(ServiceLinks.login(), body);
 	}
 }

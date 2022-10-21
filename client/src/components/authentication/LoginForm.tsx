@@ -105,7 +105,10 @@ export const LoginForm = (props: LoginFormProps) => {
 					/>
 				}
 			/>
-			<button className="font-semibold text-white bg-teal-600 w-full rounded h-10 mt-5 mb-3">
+			<button
+				className="font-semibold text-white bg-teal-600 w-full rounded h-10 mt-5 mb-3"
+				type="submit"
+			>
 				Sign Up
 			</button>
 			<div className="text-gray-500 text-sm font-semibold">
