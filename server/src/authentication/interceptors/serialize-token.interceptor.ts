@@ -33,14 +33,18 @@ export class SerializeTokenInterceptor implements NestInterceptor {
 						"attaching refresh token",
 						SerializeTokenInterceptor.name,
 					);
-					response.cookie("refreshToken", data.tokens.refreshToken, {
-						expires: new Date(
-							this.tokenConstantsService.REFRESH_TOKEN_VALIDITY_DURATION,
-						),
-						sameSite: "none",
-						httpOnly: true,
-						secure: true,
-					});
+					response.cookie(
+						TokenConstantsService.COOKIE_REFRESH_TOKEN_KEY,
+						data.tokens.refreshToken,
+						{
+							expires: new Date(
+								this.tokenConstantsService.REFRESH_TOKEN_VALIDITY_DURATION,
+							),
+							sameSite: "none",
+							httpOnly: true,
+							secure: true,
+						},
+					);
 				}
 
 				return data;

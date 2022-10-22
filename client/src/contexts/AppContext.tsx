@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { axiosInstance } from "axiosInstance";
 import { AuthenticationActionType } from "models/enums/AuthenticationActionType";
 import { UserAuthenticationResponse } from "models/response/user-authentication-response";
@@ -12,6 +13,7 @@ import {
 	useReducer,
 	useState,
 } from "react";
+import { toast } from "react-toastify";
 import { AuthenticationReducer } from "reducers/AuthenticationReducer";
 import { ServiceLinks } from "services/serviceLinks";
 
@@ -45,22 +47,24 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
 		isAuthenticated: false,
 		user: User.EMPTY,
 	});
-
+	
 	const authenticateUser = useCallback((data: UserAuthenticationResponse) => {
 		userAuthenticationActions({
 			type: AuthenticationActionType.AUTHENTICATE,
 			payload: { user: data.user, isAuthenticated: true },
 		});
-		axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`;
+		axiosInstance.defaults.headers.common[
+			"Authorization"
+		] = `Bearer ${data.tokens.accessToken}`;
 	}, []);
-
+	
 	const unAuthenticateUser = useCallback(() => {
 		userAuthenticationActions({
 			type: AuthenticationActionType.UNAUTHENTICATE,
 			payload: { user: User.EMPTY, isAuthenticated: false },
 		});
 	}, []);
-
+	
 	const reAuthenticate = useCallback(async () => {
 		try {
 			setIsRefreshingToken(true);
@@ -68,17 +72,24 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
 				withCredentials: true,
 			});
 			authenticateUser(data);
-		} catch (error) {
+		} catch (error: any) {
 			console.log(error);
+			if (error instanceof AxiosError) {
+				if (error.response?.data.status) {
+					toast.error(error.response.data.message);
+				}
+			} else {
+				toast.error(error.message);
+			}
 		} finally {
 			setIsRefreshingToken(false);
 		}
 	}, [authenticateUser]);
-
+	
 	useEffect(() => {
 		void reAuthenticate();
 	}, [reAuthenticate]);
-
+	
 	return (
 		<context.Provider
 			value={{

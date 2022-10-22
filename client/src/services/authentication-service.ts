@@ -12,4 +12,8 @@ export class AuthenticationService {
 	static login(body: LoginRequest) {
 		return axiosInstance.post<UserAuthenticationResponse>(ServiceLinks.login(), body);
 	}
+
+	static logout() {
+		return axiosInstance.post<void>(ServiceLinks.logout());
+	}
 }

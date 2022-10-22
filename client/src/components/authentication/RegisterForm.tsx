@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-location";
 import { AxiosError, AxiosResponse } from "axios";
 import { LabelledInputField } from "components/forms/LabelledInputField";
-import { Toast } from "components/Toast";
 import { useAppContext } from "contexts/AppContext";
 import { RegisterRequest } from "models/request/register-request";
 import { UserAuthenticationResponse } from "models/response/user-authentication-response";
@@ -42,17 +41,21 @@ export const RegisterForm = (props: RegisterFormProps) => {
 			authenticateUser(data);
 			navigate({ to: RoutePaths.HOME });
 		} catch (error) {
-			if (error instanceof AxiosError<ValidationErrors>) {
+			if (error instanceof AxiosError) {
 				const validationErrors = error.response?.data as ValidationErrors;
 
-				if (Array.isArray(validationErrors.message)) {
-					validationErrors.message.forEach((validationError) => {
-						Object.values(validationError.constraints).forEach((message) => {
-							setError(validationError.property as keyof FormValues, { message });
+				if (validationErrors) {
+					if (Array.isArray(validationErrors.message)) {
+						validationErrors.message.forEach((validationError) => {
+							Object.values(validationError.constraints).forEach((message) => {
+								setError(validationError.property as keyof FormValues, { message });
+							});
 						});
-					});
+					} else {
+						toast.error(validationErrors.message);
+					}
 				} else {
-					toast.error(validationErrors.message);
+					toast.error(error.message);
 				}
 			}
 		}
@@ -147,7 +150,6 @@ export const RegisterForm = (props: RegisterFormProps) => {
 					Sign In
 				</Link>
 			</div>
-			<Toast />
 		</form>
 	);
 };

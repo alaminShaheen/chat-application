@@ -9,7 +9,8 @@ const cookieExtractor = (request: Request) => {
 	let refreshToken = null;
 
 	if (request && request.cookies) {
-		refreshToken = request.cookies["refreshToken"];
+		refreshToken =
+			request.cookies[TokenConstantsService.COOKIE_REFRESH_TOKEN_KEY];
 	}
 	return refreshToken;
 };
@@ -35,7 +36,8 @@ export class RefreshTokenStrategy extends PassportStrategy(
 	validate(request: Request, payload: JwtPayload) {
 		// Now we extract the token from the request object. It is already present due to
 		// "passReqToCallback" option being true
-		const refreshToken = request.cookies["refreshToken"];
+		const refreshToken =
+			request.cookies[TokenConstantsService.COOKIE_REFRESH_TOKEN_KEY];
 		// Doing so will attach payload and refreshToken in request object to user field
 		return { ...payload, refreshToken };
 	}

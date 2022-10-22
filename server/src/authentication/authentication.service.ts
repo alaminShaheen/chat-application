@@ -96,7 +96,14 @@ export class AuthenticationService {
 	}
 
 	async logout(userId: number): Promise<void> {
-		await this.usersService.update(userId, { refreshToken: null });
+		try {
+			await this.usersService.update(userId, { refreshToken: null });
+			return;
+		} catch (error: any) {
+			throw new InternalServerErrorException(
+				this.errorMessagesService.SERVER_ERROR,
+			);
+		}
 	}
 
 	async refreshToken(

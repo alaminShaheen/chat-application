@@ -10,11 +10,11 @@ export const Login = () => {
 	}, []);
 
 	return (
-		<div className="flex flex-row-reverse w-screen h-screen items-center p-20">
-			<section className="w-1/2 p-5 flex justify-center">
+		<div className="flex flex-row-reverse w-screen h-screen items-center p-40">
+			<section className="w-2/5 p-5 flex justify-center">
 				<LoginForm onUserLogin={onUserLogin} />
 			</section>
-			<section className="w-1/2 flex justify-center">
+			<section className="w-3/5 flex justify-center">
 				<ImageShowcase />
 			</section>
 		</div>

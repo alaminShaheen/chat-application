@@ -26,6 +26,7 @@ import { LoginUserResponseDto } from "authentication/dtos/login-user.response.dt
 import { RegisterUserResponseDto } from "authentication/dtos/register-user.response.dto";
 import { SerializeTokenInterceptor } from "authentication/interceptors/serialize-token.interceptor";
 import { SerializeInterceptor } from "common/interceptors/serialize.interceptor";
+import { TokenConstantsService } from "constants/token-constants.service";
 import { Response } from "express";
 import { DocumentationMessagesService } from "../app-messages/documentation-messages.service";
 import { CurrentUserInterceptor } from "../common/interceptors/current-user.interceptor";
@@ -78,16 +79,6 @@ export class AuthenticationController {
 			body.username,
 			body.password,
 		);
-
-		// response.cookie("refreshToken", tokens.refreshToken, {
-		// 	expires: new Date(
-		// 		this.tokenConstantsService.REFRESH_TOKEN_VALIDITY_DURATION,
-		// 	),
-		// 	domain: this.appConstantsService.CLIENT_DOMAIN,
-		// 	sameSite: "strict",
-		// 	httpOnly: true,
-		// });
-		// console.log(user);
 	}
 
 	@Post("login")
@@ -126,8 +117,18 @@ export class AuthenticationController {
 	@ApiUnauthorizedResponse({
 		description: DocumentationMessagesService.UNAUTHORIZED,
 	})
-	async logout(@Req() request): Promise<void> {
+	async logout(
+		@Req() request,
+		@Res({ passthrough: true }) response: Response,
+	): Promise<void> {
+		this.logger.log("Logging out user");
 		const user = request.user;
+		response.clearCookie(TokenConstantsService.COOKIE_REFRESH_TOKEN_KEY, {
+			maxAge: -1,
+			sameSite: "none",
+			httpOnly: true,
+			secure: true,
+		});
 		return await this.authenticationService.logout(user.userId);
 	}
 

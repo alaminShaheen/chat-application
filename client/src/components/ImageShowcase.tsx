@@ -9,7 +9,7 @@ const PREVIEW_IMAGES = [enthusiastic, mental_health, online_wishes, vision_board
 
 export const ImageShowcase = () => {
 	return (
-		<div>
+		<div className="w-auto">
 			<img
 				src={PREVIEW_IMAGES[CommonUtils.randomNumber(0, PREVIEW_IMAGES.length - 1)]}
 				alt="image"
