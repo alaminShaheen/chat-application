@@ -27,50 +27,53 @@ export const SideNavbar = (props: SideNavbarProps) => {
 	};
 
 	return (
-		<aside className="w-[5rem] flex flex-col justify-between bg-gray-100 text-gray-700 shadow h-full px-3 py-6">
+		<aside className="w-[5rem] flex flex-col justify-between bg-zinc-200 text-gray-700 shadow h-full px-3 py-6">
 			<div className="flex items-center w-full">
 				<Link className="h-12 w-12 mx-auto" to={RoutePaths.HOME}>
 					<img className="h-full w-full" src={chat} alt="app logo" />
 				</Link>
 			</div>
-			<ul className="flex flex-col items-center justify-center gap-5 border-t-2 border-b-2 py-5">
-				<li className="hover:text-teal-700 px-3 py-2" title="Profile">
+			<ul className="flex flex-col items-center justify-center gap-5 border-zinc-400 border-t-2 border-b-2 py-5">
+				<li className="text-zinc-500 hover:text-violet-700 px-3 py-2" title="Profile">
 					<Link
 						to={RoutePaths.PROFILE}
-						getActiveProps={() => ({ className: "text-teal-700" })}
+						getActiveProps={() => ({ className: "text-violet-700" })}
 					>
 						<CgProfile size={30} />
 					</Link>
 				</li>
-				<li className="hover:text-teal-700 px-3 py-2" title="Search">
+				<li className="text-zinc-600 hover:text-violet-700 px-3 py-2" title="Search">
 					<Link
 						to={RoutePaths.SEARCH}
-						getActiveProps={() => ({ className: "text-teal-700" })}
+						getActiveProps={() => ({ className: "text-violet-700" })}
 					>
 						<BiSearch size={30} />
 					</Link>
 				</li>
-				<li className="hover:text-teal-700 px-3 py-2" title="Personal Chats">
+				<li
+					className="text-zinc-600 hover:text-violet-700 px-3 py-2"
+					title="Personal Chats"
+				>
 					<Link
 						to={RoutePaths.PERSONAL_CHATS}
-						getActiveProps={() => ({ className: "text-teal-700" })}
+						getActiveProps={() => ({ className: "text-violet-700" })}
 					>
 						<BiMessageDetail size={30} />
 					</Link>
 				</li>
-				<li className="hover:text-teal-700 px-3 py-2" title="Home">
+				<li className="text-zinc-600 hover:text-violet-700 px-3 py-2" title="Home">
 					<Link
 						to={RoutePaths.HOME}
 						activeOptions={{ exact: true }}
-						getActiveProps={() => ({ className: "text-teal-700" })}
+						getActiveProps={() => ({ className: "text-violet-700" })}
 					>
 						<BiHomeAlt size={30} />
 					</Link>
 				</li>
-				<li className="hover:text-teal-700 px-3 py-2" title="Group Chats">
+				<li className="text-zinc-600 hover:text-violet-700 px-3 py-2" title="Group Chats">
 					<Link
 						to={RoutePaths.GROUP_CHATS}
-						getActiveProps={() => ({ className: "text-teal-700" })}
+						getActiveProps={() => ({ className: "text-violet-700" })}
 					>
 						<HiOutlineUserGroup size={30} />
 					</Link>

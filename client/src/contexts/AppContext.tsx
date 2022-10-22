@@ -49,6 +49,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
 	});
 	
 	const authenticateUser = useCallback((data: UserAuthenticationResponse) => {
+		console.log(data);
 		userAuthenticationActions({
 			type: AuthenticationActionType.AUTHENTICATE,
 			payload: { user: data.user, isAuthenticated: true },
@@ -87,8 +88,10 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
 	}, [authenticateUser]);
 	
 	useEffect(() => {
-		void reAuthenticate();
-	}, [reAuthenticate]);
+		if (!userAuthenticationData.isAuthenticated) {
+			void reAuthenticate();
+		}
+	}, [reAuthenticate, userAuthenticationData.isAuthenticated]);
 	
 	return (
 		<context.Provider

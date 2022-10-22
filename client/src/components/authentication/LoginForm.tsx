@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-location";
 import { AxiosError, AxiosResponse } from "axios";
+import { Button } from "components/forms/Button";
 import { LabelledInputField } from "components/forms/LabelledInputField";
 import { Toast } from "components/Toast";
 import { useAppContext } from "contexts/AppContext";
@@ -80,7 +81,7 @@ export const LoginForm = (props: LoginFormProps) => {
 				label="Username"
 				type="text"
 				id="username"
-				placeholder="Enter a username"
+				placeholder="Your username"
 				hasError={!!errors.username}
 				errorMessage={errors.username?.message}
 				icon={
@@ -105,7 +106,7 @@ export const LoginForm = (props: LoginFormProps) => {
 				label="Password"
 				type="password"
 				id="password"
-				placeholder="Enter a password"
+				placeholder="Your password"
 				hasError={!!errors.password}
 				errorMessage={errors.password?.message}
 				icon={
@@ -115,13 +116,7 @@ export const LoginForm = (props: LoginFormProps) => {
 					/>
 				}
 			/>
-			<button
-				className={`font-semibold relative flex justify-center items-center text-white bg-teal-600 ${
-					isLoading ? "bg-opacity-70" : ""
-				} w-full rounded h-10 mt-5 mb-3`}
-				disabled={isLoading}
-				type="submit"
-			>
+			<Button disabled={isLoading} type="submit">
 				{isLoading ? (
 					<AiOutlineLoading3Quarters
 						className="animate-spin delay-500 absolute left-1/2 font-bold"
@@ -130,13 +125,28 @@ export const LoginForm = (props: LoginFormProps) => {
 				) : (
 					<span>Sign In</span>
 				)}
-			</button>
-			<div className="text-gray-500 text-sm font-semibold">
+			</Button>
+			{/*<button*/}
+			{/*	className={`font-semibold relative flex justify-center items-center text-white bg-teal-600 ${*/}
+			{/*		isLoading ? "bg-opacity-70" : ""*/}
+			{/*	} w-full rounded h-10 mt-5 mb-3`}*/}
+			{/*	disabled={isLoading}*/}
+			{/*	type="submit"*/}
+			{/*>*/}
+			{/*	{isLoading ? (*/}
+			{/*		<AiOutlineLoading3Quarters*/}
+			{/*			className="animate-spin delay-500 absolute left-1/2 font-bold"*/}
+			{/*			size={17}*/}
+			{/*		/>*/}
+			{/*	) : (*/}
+			{/*		<span>Sign In</span>*/}
+			{/*	)}*/}
+			{/*</button>*/}
+			<div className="text-zinc-500 text-sm font-semibold">
 				Don&apos;t have an account?
 				<Link
-					className="ml-2 text-teal-600 hover:text-teal-800 font-semibold cursor-pointer"
+					className="ml-2 text-zinc-700 hover:text-zinc-900 font-semibold cursor-pointer"
 					to={RoutePaths.REGISTER}
-					activeOptions={{ exact: true }}
 				>
 					Sign Up
 				</Link>

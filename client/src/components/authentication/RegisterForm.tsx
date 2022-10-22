@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-location";
 import { AxiosError, AxiosResponse } from "axios";
+import { Button } from "components/forms/Button";
 import { LabelledInputField } from "components/forms/LabelledInputField";
 import { useAppContext } from "contexts/AppContext";
 import { RegisterRequest } from "models/request/register-request";
@@ -134,18 +135,12 @@ export const RegisterForm = (props: RegisterFormProps) => {
 					/>
 				}
 			/>
-			<button
-				className="font-semibold text-white bg-violet-600 w-full rounded h-10 mt-5 mb-3"
-				type="submit"
-			>
-				Sign Up
-			</button>
-			<div className="text-gray-500 text-sm font-semibold">
+			<Button type="submit">Sign Up</Button>
+			<div className="text-zinc-500 text-sm font-semibold">
 				Already have an account?
 				<Link
-					className="ml-2 text-violet-600 cursor-pointer"
+					className="ml-2 text-zinc-700 hover:text-zinc-900 cursor-pointer"
 					to={RoutePaths.LOGIN}
-					activeOptions={{ exact: true }}
 				>
 					Sign In
 				</Link>

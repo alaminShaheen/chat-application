@@ -1,5 +1,6 @@
 import {
 	forwardRef,
+	Fragment,
 	HTMLInputTypeAttribute,
 	InputHTMLAttributes,
 	ReactNode,
@@ -22,29 +23,30 @@ export const LabelledInputField = forwardRef<HTMLInputElement, InputProps>(
 
 		const generateInputFieldClassNames = () => {
 			let classes = className ? className + " " : "";
-			classes += (hasError ? "border-red-500" : "border-gray-300") + " ";
-			classes += (hasError ? "focus:border-red-500" : "focus:border-teal-500") + " ";
-			classes += (icon ? "pl-9" : "") + " ";
-			classes += (type === "password" ? "pr-9" : "") + " ";
+			classes += (hasError ? "border-red-500" : "border-black") + " ";
 			return classes;
 		};
 
 		const renderPasswordVisibility = () => {
 			if (showPassword) {
 				return (
-					<AiOutlineEyeInvisible
-						className="absolute top-3.5 right-3 text-gray-600 cursor-pointer"
-						onClick={() => setShowPassword((prev) => !prev)}
-						size={18}
-					/>
+					<span className="absolute top-1/2 -translate-y-1/2 right-3">
+						<AiOutlineEyeInvisible
+							className="text-gray-600 cursor-pointer"
+							onClick={() => setShowPassword((prev) => !prev)}
+							size={18}
+						/>
+					</span>
 				);
 			} else {
 				return (
-					<AiOutlineEye
-						className="absolute top-3.5 right-3 text-gray-600 cursor-pointer"
-						onClick={() => setShowPassword((prev) => !prev)}
-						size={18}
-					/>
+					<span className="absolute top-1/2 -translate-y-1/2 right-3">
+						<AiOutlineEye
+							className="text-gray-600 cursor-pointer"
+							onClick={() => setShowPassword((prev) => !prev)}
+							size={18}
+						/>
+					</span>
 				);
 			}
 		};
@@ -58,32 +60,28 @@ export const LabelledInputField = forwardRef<HTMLInputElement, InputProps>(
 		};
 
 		return (
-			<div className="flex flex-col align-middle my-4">
-				{label && (
-					<label
-						className="text-xl font-semibold text-gray-700 mt-2 mb-3"
-						htmlFor={rest.name}
-					>
-						{label}
-					</label>
-				)}
-				<div className="relative">
+			<Fragment>
+				<label
+					className={`relative block p-3 border-2 rounded my-4 ${generateInputFieldClassNames()}`}
+					htmlFor="name"
+				>
+					{icon && <span className="mr-6">{icon}</span>}
+					<span className="text-md font-semibold text-zinc-900">{label}</span>
+					{type === "password" && renderPasswordVisibility()}
 					<input
 						{...rest}
 						ref={ref}
+						className="w-full bg-transparent p-0 text-sm  text-gray-500 focus:outline-none"
 						type={getInputType()}
-						className={`border focus:border-2 outline-0 w-full rounded block h-11 p-3 ${generateInputFieldClassNames()}`}
 					/>
-					{icon && icon}
-					{type === "password" && renderPasswordVisibility()}
-				</div>
+				</label>
 				{hasError && (
-					<span className="text-red-500 text-sm mt-2 flex items-center">
+					<span className="text-red-500 text-sm block flex items-center pb-2">
 						<BiErrorAlt className="inline mr-1" size={18} />
 						{errorMessage}
 					</span>
 				)}
-			</div>
+			</Fragment>
 		);
 	},
 );

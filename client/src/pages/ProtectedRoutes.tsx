@@ -18,7 +18,7 @@ export const ProtectedRoutes = () => {
 		return <div>Loading...</div>;
 	} else
 		return isAuthenticated ? (
-			<div className="flex h-screen">
+			<div className="flex h-screen" style={{ backgroundColor: "#f4f4f0" }}>
 				<SideNavbar onLogout={onLogout} />
 				<Outlet />
 			</div>
